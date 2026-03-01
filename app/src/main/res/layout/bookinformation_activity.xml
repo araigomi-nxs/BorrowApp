@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:background="#80000000">
 
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/listview_bg"
+        android:outlineSpotShadowColor="@color/black"
+        app:cardCornerRadius="20dp"
         android:backgroundTint="@android:color/white">
 
         <ScrollView
@@ -30,7 +32,7 @@
                     android:gravity="center"
                     android:text="Books Info"
                     android:textColor="@color/black"
-                    android:textSize="28sp"
+                    android:textSize="23sp"
                     android:textStyle="bold" />
 
                 <View
