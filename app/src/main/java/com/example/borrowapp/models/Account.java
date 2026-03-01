@@ -1,6 +1,16 @@
 package com.example.borrowapp.models;
 
 public class Account {
+    //SIGNED IN ACCOUNT
+    private static String U_username;
+    public static void setU_username(String username){
+        U_username=username;
+    }
+    public static String getU_username(){
+        return U_username;
+    }
+
+    //Accounts
     private int id;
     private String username;
     private String password;
