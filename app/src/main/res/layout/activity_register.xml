@@ -20,54 +20,59 @@
             android:layout_gravity="center"
             android:layout_marginBottom="70dp"
 
-            android:textColor="@color/black"
+            android:fontFamily="@font/archivo_black"
             android:text="BbOOKINGS"
+            android:textColor="@color/black"
             android:textSize="30dp"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etUsername"
-            android:padding="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:hint="Username"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/edittext_bg"
-            android:layout_marginBottom="15dp"/>
+            android:fontFamily="@font/poppins"
+            android:hint="Username"
+            android:padding="10dp" />
 
         <EditText
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etPassword"
-            android:padding="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:inputType="textPassword"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/edittext_bg"
+            android:fontFamily="@font/poppins"
             android:hint="Password"
-            android:layout_marginBottom="15dp"/>
+            android:inputType="textPassword"
+            android:padding="10dp" />
 
 
         <Button
+            android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnRegister"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/buttonlogin_bg"
+            android:fontFamily="@font/poppins_semibold"
             android:text="Register"
             android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/tvAlready"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvAlready"
+            android:layout_gravity="center"
             android:layout_marginBottom="150dp"
-            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
             android:text="Already have an account"
-            android:layout_gravity="center"/>
+            android:textColor="@color/black" />
 
 
     </LinearLayout>
