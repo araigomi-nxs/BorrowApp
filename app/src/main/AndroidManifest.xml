@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BorrowApp">
         <activity
-            android:name=".BooklistActivity"
+            android:name=".activities.BooklistActivity"
             android:exported="false" />
         <activity
             android:name=".BorrowedBooksActivity"
             android:exported="false" />
         <activity
-            android:name=".functions.BorrowedListActivity"
+            android:name=".activities.BorrowedListActivity"
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".book_list_item" -->
         <!-- android:exported="false" /> -->
