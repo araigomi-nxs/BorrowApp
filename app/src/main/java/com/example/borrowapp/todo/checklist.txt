@@ -20,7 +20,7 @@ Database tables
 
 
 Classes
-⏹ 1. Database adapter - handles accounts, borrowlist, Book Object list
+✅ 1. Database adapter - handles accounts, borrowlist, Book Object list
 ✅2. Account Functions 
     ✅-register account
         - check cases
@@ -31,9 +31,9 @@ Classes
         - functions
         - confirmation if user exist Account ( input username & input pass) -> function( String username, String password match)  found?  1:0
 ⏹3. Display Class for Book information activity
-⏹4. Listview adapter - fetch from Book Object List
+✅4. Listview adapter - fetch from Book Object List
 ⏹5. Borrow Class - handles operation for borrowing, updating quantity and updating borrow list table
-⏹6. Booklist initializer - intialize hardcoded book list
+✅6. Booklist initializer - intialize hardcoded book list
 ✅7. Hardcoded booklist - 
 ------------------------------------------------------------
 

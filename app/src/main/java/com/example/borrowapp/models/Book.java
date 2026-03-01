@@ -19,7 +19,10 @@ public class Book {
         Book.addBook(new Book(3,"Book3", "Description3", "Author3", 1));
         Book.addBook(new Book(4,"Book4", "Description4", "Author4", 1));
         Book.addBook(new Book(5,"Book5", "Description5", "Author5", 1));
-
+        Book.addBook(new Book(6,"Book6", "Description5", "Author5", 1));
+        Book.addBook(new Book(7,"Book7", "Description5", "Author5", 1));
+        Book.addBook(new Book(8,"Book8", "Description5", "Author5", 1));
+        Book.addBook(new Book(9,"Book9", "Description5", "Author5", 1));
     }
 
     public static void addBook(Book book) {
@@ -73,6 +76,7 @@ public class Book {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
 
 
 }

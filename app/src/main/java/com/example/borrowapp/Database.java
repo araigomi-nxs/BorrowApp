@@ -100,7 +100,7 @@ public class Database extends SQLiteOpenHelper {
             }
         }
     }
-    public void borrowBooks(Book book){
+    public static void borrowBooks(Book book){
         ContentValues content=new ContentValues();
         content.put("id",book.getId());
         content.put("title",book.getTitle());
