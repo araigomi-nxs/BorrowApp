@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,27 +13,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.borrowapp.Database;
 import com.example.borrowapp.R;
-import com.example.borrowapp.functions.AccountOperations;
-import com.example.borrowapp.functions.BooksDef;
-import com.example.borrowapp.models.Account;
 
 public class Login_activity extends AppCompatActivity {
-    Database db;
-    AccountOperations ao;
+
     Button register;
     Button login ;
-    EditText inputUsername, inputPassword;
-    private void start(){
-        db.initializeUser();
-        new BooksDef().initializeBooklist();
-    }
+
+    EditText etUsername;
+    EditText etPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        db=new Database(this);
-        ao = new AccountOperations(this);
-        start();
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
@@ -42,21 +34,35 @@ public class Login_activity extends AppCompatActivity {
             return insets;
         });
 
-            inputUsername = findViewById(R.id.etUsername);
-            inputPassword = findViewById(R.id.etPassword);
+            etUsername = findViewById(R.id.etUsername);
+            etPassword = findViewById(R.id.etPassword);
             login = findViewById(R.id.btnLogin);
-        login.setOnClickListener(v -> {
-            String username = inputUsername.getText().toString().trim();
-            String password = inputPassword.getText().toString();
-            if (ao.verifyAccount(username, password)) {
-                Intent intent = new Intent(Login_activity.this, BorrowedListActivity.class);
-                startActivity(intent);
-                Account.setU_username(username);
-            } else {
-                inputUsername.setError("Invalid username");
-                inputPassword.setError("Invalid password");
-            }
-        });
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    String username = etUsername.getText().toString().trim();
+                    String password = etPassword.getText().toString().trim();
+
+                    if (username.isEmpty()) {
+                        Toast.makeText(Login_activity.this, "Please enter username", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // You can add password validation here
+                    if (password.isEmpty()) {
+                        Toast.makeText(Login_activity.this, "Please enter password", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // Pass the username to BorrowedListActivity
+                    Intent intent = new Intent(Login_activity.this, BorrowedListActivity.class);
+                    intent.putExtra("USERNAME", username); // Send username
+                    startActivity(intent);
+                    finish(); // Optional: close login activity
+                }
+
+            });
 
             register = findViewById(R.id.btnCreate);
             register.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +73,9 @@ public class Login_activity extends AppCompatActivity {
                 }
             });
 
-    }
 
+
+
+
+    }
 }
