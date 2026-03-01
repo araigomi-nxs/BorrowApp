@@ -1,5 +1,4 @@
 package com.example.borrowapp;
-/*
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,7 +11,6 @@ import androidx.annotation.Nullable;
 import com.example.borrowapp.models.Account;
 import com.example.borrowapp.models.Book;
 
-import java.awt.print.Book;
 
 public class Database extends SQLiteOpenHelper {
     private static final String DB_NAME = "borrowapp.db";
@@ -32,7 +30,7 @@ public class Database extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,"+
                 "username VARCHAR(16) UNIQUE, "+
                 "password VARCHAR(16))");
-        db.execSQL("CREATE TABLE borrow_list("+
+        db.execSQL("CREATE TABLE borrow_books("+
                 "account_id INTEGER,"+
                 "title TEXT UNIQUE,"+
                 "description TEXT,"+
@@ -42,24 +40,26 @@ public class Database extends SQLiteOpenHelper {
     //if ever mag update idelete
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE accounts, borrow_list IF EXISTS accounts");
+        db.execSQL("DROP TABLE IF EXISTS accounts");
+        db.execSQL("DROP TABLE IF EXISTS borrow_books");
     }
     public static boolean checkUsername(String username){
         try(Cursor cursor = db.query("accounts",new String[]{String.valueOf(username)},null,null,null,null,null)){
             if(cursor.moveToFirst()){
                 do{
-                    if (username.equals(cursor.getString(1)));
+                    if (username.equals(cursor.getString(1)))return false;
                 }while(cursor.moveToNext());
             }
         }
+        return true;
     }
     public static boolean log_in(Account account){
 
-        try(Cursor cursor = db.query("accounts",null,null,null,null)){
+        try(Cursor cursor = db.query("accounts",null,null,null,null,null,null)){
             if(cursor.moveToFirst()){
                 do{
-                    String username = cursor.getString(cursor.getColumnIndex("username"));
-                    String password = cursor.getString(cursor.getColumnIndex("password"));
+                    String username = cursor.getString(1);
+                    String password = cursor.getString(2);
                     if (account.getUsername().equals(username) && account.getPassword().equals(password))
                     { return true; }
                 }while(cursor.moveToNext());
@@ -100,5 +100,16 @@ public class Database extends SQLiteOpenHelper {
             }
         }
     }
+    public void borrowBooks(Book book){
+        ContentValues content=new ContentValues();
+        content.put("id",book.getId());
+        content.put("title",book.getTitle());
+        content.put("description",book.getDescription());
+        content.put("author",book.getAuthor());
+        content.put("quantity",book.getQuantity());
+        db.insert("borrow_books",null,content);
+    }
+    public void returnBooks(int id){
+        db.delete("borrow_books","id=?",new String[]{String.valueOf(id)});
+    }
 }
-*/
