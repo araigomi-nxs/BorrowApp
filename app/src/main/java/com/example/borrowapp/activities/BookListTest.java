@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.borrowapp.R;
+import com.example.borrowapp.functions.BookAdapter;
+import com.example.borrowapp.functions.BookArrayAdapter;
 import com.example.borrowapp.functions.BooksDef;
 import com.example.borrowapp.functions.RecyclerViewAdapter;
 import com.example.borrowapp.models.Book;
@@ -45,9 +47,13 @@ public class BookListTest extends AppCompatActivity {
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(Book.bookList);
         recyclerView.setAdapter(adapter);
 
-
+        BookAdapter bookAdapter = new BookAdapter(this, Book.bookList);
         ListView listView = findViewById(R.id.listView);
-        listView.setAdapter(adapter);
+        listView.setAdapter(bookAdapter);
+
+        BookArrayAdapter bookArrayAdapter = new BookArrayAdapter(this, Book.bookList);
+        ListView listView2 = findViewById(R.id.listView2);
+        listView2.setAdapter(bookArrayAdapter);
 
 
     }

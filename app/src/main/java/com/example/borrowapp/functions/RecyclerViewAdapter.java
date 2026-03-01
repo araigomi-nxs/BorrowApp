@@ -38,10 +38,7 @@ public class RecyclerViewAdapter  extends RecyclerView.Adapter<RecyclerViewAdapt
         holder.descriptionTextView.setText(book.getDescription());
         holder.authortv.setText(book.getAuthor());
         holder.quantitytv.setText(String.valueOf(book.getQuantity()));
-
-
     }
-
 
     @Override
     public int getItemCount() {
