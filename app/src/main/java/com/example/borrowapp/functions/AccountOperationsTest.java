@@ -9,7 +9,7 @@ import com.example.borrowapp.models.Account;
 
 public class AccountOperationsTest {
 
-    public boolean registerAccount(Context context, Account account){
+    public static boolean registerAccount(Context context, Account account){
         DatabaseTest databaseTest = new DatabaseTest(context);
 
         if(account.getUsername().length() > 16){
@@ -23,17 +23,20 @@ public class AccountOperationsTest {
 
             return false; //password does not match
         }
-
-
         databaseTest.registerAccount(account);
         return true;
 
     }
-
-    public boolean loginAccount(Context context, Account account)
+    public  static  boolean loginAccount(Context context, Account account)
     {
-       // DatabaseTest databaseTest = new DatabaseTest(context);
-        return  true;
+       DatabaseTest databaseTest = new DatabaseTest(context);
+        if(!databaseTest.checkUsername(account.getUsername())){
+            return false; //username exists
+        }
+        if( ! databaseTest.log_in(account.getUsername(),account.getPassword()))
+        {
+            return false;
+        }
+        return true;
     }
-
 }

@@ -56,9 +56,9 @@ public class Register_activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 account = new Account(usernameTv.getText().toString(), passwordTv.getText().toString());
-                AccountOperationsTest accountOperationsTest = new AccountOperationsTest();
 
-                if (accountOperationsTest.registerAccount(Register_activity.this, account)) {
+
+                if (AccountOperationsTest.registerAccount(Register_activity.this, account)) {
                     Intent intent = new Intent(Register_activity.this, Login_activity.class);
                     startActivity(intent);
                     Toast.makeText(Register_activity.this, "Account created successfully", Toast.LENGTH_SHORT).show();

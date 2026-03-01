@@ -14,6 +14,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.borrowapp.R;
+import com.example.borrowapp.functions.AccountOperationsTest;
+import com.example.borrowapp.models.Account;
 
 public class Login_activity extends AppCompatActivity {
 
@@ -40,26 +42,31 @@ public class Login_activity extends AppCompatActivity {
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Account account = new Account(etUsername.getText().toString(), etPassword.getText().toString());
 
-                    String username = etUsername.getText().toString().trim();
-                    String password = etPassword.getText().toString().trim();
-
-                    if (username.isEmpty()) {
+                    if (account.getUsername().isEmpty()) {
                         Toast.makeText(Login_activity.this, "Please enter username", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     // You can add password validation here
-                    if (password.isEmpty()) {
+                    if (account.getPassword().isEmpty()) {
                         Toast.makeText(Login_activity.this, "Please enter password", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    // Pass the username to BorrowedListActivity
-                    Intent intent = new Intent(Login_activity.this, BorrowedListActivity.class);
-                    intent.putExtra("USERNAME", username); // Send username
-                    startActivity(intent);
-                    finish(); // Optional: close login activity
+                    if(AccountOperationsTest.loginAccount(Login_activity.this,account))
+                    {
+                        Intent intent = new Intent(Login_activity.this, BorrowedListActivity.class);
+                        intent.putExtra("ACCOUNT", account);
+                        startActivity(intent);
+                        Toast.makeText(Login_activity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(Login_activity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+                    }
+                    // Optional: close login activity
                 }
 
             });

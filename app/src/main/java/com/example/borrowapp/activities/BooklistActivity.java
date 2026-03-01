@@ -43,7 +43,7 @@ public class BooklistActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        Account account = (Account) getIntent().getSerializableExtra("ACCOUNT");
         Book.initializeBooklist();
         bookList = Book.bookList;
 
@@ -125,7 +125,9 @@ public class BooklistActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BooklistActivity.this, BorrowedListActivity.class );
+                intent.putExtra("ACCOUNT", account);
                 startActivity( intent);
+
             }
         });
 

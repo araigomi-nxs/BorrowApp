@@ -25,12 +25,18 @@ public class DatabaseTest extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,"+
                 "username TEXT UNIQUE, "+
                 "password TEXT)");
+        db.execSQL("CREATE TABLE borrow_books("+
+                "account_id INTEGER,"+
+                "title TEXT UNIQUE,"+
+                "description TEXT,"+
+                "author TEXT,"+
+                "quantity INTEGER)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS accounts");
-
+        db.execSQL("DROP TABLE IF EXISTS borrow_books");
     }
 
     public boolean checkUsername(String username){
@@ -61,6 +67,7 @@ public class DatabaseTest extends SQLiteOpenHelper {
         content.put("password",account.getPassword());
         db.insert("accounts",null,content);
     }
+
     public void initializeUser() {
         SQLiteDatabase db=this.getWritableDatabase();
         try (Cursor cursor = db.query("accounts", null, null, null, null, null, null)) {
