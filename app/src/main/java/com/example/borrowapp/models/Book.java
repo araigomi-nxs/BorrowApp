@@ -24,6 +24,7 @@ public class Book {
         Book.addBook(new Book(8, "The Alchemist", "An allegorical novel about a young shepherd on his journey to find treasure and discover his personal legend. Santiago learns to listen to his heart and follow his dreams.", "Paulo Coelho", 5));
         Book.addBook(new Book(9, "The Martian", "A science fiction story about an astronaut stranded on Mars trying to survive. Using his ingenuity and scientific knowledge, Mark Watney fights to stay alive until rescue.", "Andy Weir", 4));
         Book.addBook(new Book(10, "The Da Vinci Code", "A mystery thriller that follows a symbologist investigating a murder in the Louvre Museum. Robert Langdon uncovers secrets that could shake the foundations of Christianity.", "Dan Brown", 7));
+
     }
 
     public static void addBook(Book book) {

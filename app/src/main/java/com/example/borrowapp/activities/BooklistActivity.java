@@ -53,7 +53,7 @@ public class BooklistActivity extends AppCompatActivity {
         Log.d("BooklistActivity", "bookList size: " + bookList.size());
 
         listView = findViewById(R.id.listViewBooks);
-          BookArrayAdapter bookArrayAdapter =new BookArrayAdapter(this, bookList);
+        BookArrayAdapter bookArrayAdapter =new BookArrayAdapter(this, bookList);
         listView.setAdapter(bookArrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

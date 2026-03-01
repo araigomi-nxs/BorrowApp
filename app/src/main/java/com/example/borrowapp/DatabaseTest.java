@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.borrowapp.models.Account;
 import com.example.borrowapp.models.Book;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class DatabaseTest extends SQLiteOpenHelper {
     private static final String DB_NAME = "borrowapp2.db";
@@ -106,6 +109,28 @@ public class DatabaseTest extends SQLiteOpenHelper {
         content.put("quantity",book.getQuantity());
         db.insert("borrow_books",null,content);
     }
+    public List<Book> getBorrowedBooklist(){
+        List<Book> borrowedBookList = new ArrayList<>();
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT * FROM borrow_books",null);
+
+        while (cursor.moveToNext()) {
+            Book book = new Book(
+                    cursor.getInt(0),  // account_id (first column)
+                    cursor.getString(1), // title (second column)
+                    cursor.getString(2), // description (third column)
+                    cursor.getString(3), // author (fourth column)
+                    cursor.getInt(4)     // quantity (fifth column)
+            );
+            borrowedBookList.add(book);
+        }
+
+        cursor.close();
+        db.close();
+        return borrowedBookList;
+    }
+
+
     public void returnBooks(int id){
         SQLiteDatabase db=this.getWritableDatabase();
         db.delete("borrow_books","id=?",new String[]{String.valueOf(id)});
