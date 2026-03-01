@@ -59,6 +59,8 @@ public class Register_activity extends AppCompatActivity {
                 AccountOperationsTest accountOperationsTest = new AccountOperationsTest();
 
                 if (accountOperationsTest.registerAccount(Register_activity.this, account)) {
+                    Intent intent = new Intent(Register_activity.this, Login_activity.class);
+                    startActivity(intent);
                     Toast.makeText(Register_activity.this, "Account created successfully", Toast.LENGTH_SHORT).show();
 
                 }

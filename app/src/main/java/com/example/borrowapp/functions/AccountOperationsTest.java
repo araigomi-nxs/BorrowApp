@@ -30,4 +30,10 @@ public class AccountOperationsTest {
 
     }
 
+    public boolean loginAccount(Context context, Account account)
+    {
+       // DatabaseTest databaseTest = new DatabaseTest(context);
+        return  true;
+    }
+
 }
