@@ -15,6 +15,7 @@ import com.example.borrowapp.R;
 
 public class Login_activity extends AppCompatActivity {
 
+    Button register;
     Button login ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,15 @@ public class Login_activity extends AppCompatActivity {
                     Intent intent = new Intent(Login_activity.this, BorrowedListActivity.class);
                     startActivity(intent );
 
+                }
+            });
+
+            register = findViewById(R.id.btnCreate);
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Login_activity.this, Register_activity.class);
+                    startActivity(intent);
                 }
             });
 

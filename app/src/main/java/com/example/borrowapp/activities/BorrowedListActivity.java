@@ -14,7 +14,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.borrowapp.BorrowedBooksActivity;
 import com.example.borrowapp.R;
 
 public class BorrowedListActivity extends AppCompatActivity {
@@ -33,12 +32,16 @@ public class BorrowedListActivity extends AppCompatActivity {
             return insets;
         });
 
+
+
         addBookButton = findViewById(R.id.btnAddBook);
+
         addBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BorrowedListActivity.this, BooklistActivity.class );
                 startActivity( intent);
+
 
             }
         });
