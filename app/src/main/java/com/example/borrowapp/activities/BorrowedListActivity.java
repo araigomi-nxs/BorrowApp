@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,7 @@ import com.example.borrowapp.models.Account;
 public class BorrowedListActivity extends AppCompatActivity {
 
     ListView borrowedBookList;
-    Button addBookButton, returnButton;
+    Button addBookButton, logoutButton;
 
     TextView tvUsername;
 
@@ -43,7 +44,7 @@ public class BorrowedListActivity extends AppCompatActivity {
 
         tvUsername = findViewById(R.id.tvUsername);
         addBookButton = findViewById(R.id.btnAddBook);
-        returnButton = findViewById(R.id.btnBack);
+        logoutButton = findViewById(R.id.btnLogout);
 
        Account account = (Account) getIntent().getSerializableExtra("ACCOUNT");
         tvUsername.setText(account.getUsername());
@@ -66,9 +67,11 @@ public class BorrowedListActivity extends AppCompatActivity {
                 startActivity( intent);
             }
         });
-        returnButton.setOnClickListener(new View.OnClickListener() {
+        logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Toast.makeText(BorrowedListActivity.this, "Logout Successful, " + account.getUsername(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(BorrowedListActivity.this, Login_activity.class );
                 startActivity( intent);
             }
