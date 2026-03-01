@@ -12,16 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BorrowApp">
         <activity
-            android:name=".book_list_item"
+            android:name=".BorrowedBooksActivity"
             android:exported="false" />
+        <activity
+            android:name=".functions.BorrowedListActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".book_list_item" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".activities.Register_activity"
             android:exported="false" />
         <activity
-            android:name=".activities.Login_activity"
+            android:name=".activities.BookListTest"
             android:exported="false" />
         <activity
-            android:name=".activities.BookListTest"
+            android:name=".activities.Login_activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
