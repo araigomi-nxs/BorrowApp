@@ -79,8 +79,19 @@ public class Book {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantity(int quantity, int operation) {
+       if(operation == 1)
+       {
+           this.quantity += quantity;
+       }
+       else if(operation == 0)
+       {
+           this.quantity -= quantity;
+       }
+       else
+       {
+           this.quantity = quantity;
+       }
     }
 
 

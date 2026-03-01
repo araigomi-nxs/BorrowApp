@@ -82,6 +82,7 @@ public class BooklistActivity extends AppCompatActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(BooklistActivity.this);
                 builder.setView(view);
+
                 addquantityButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -101,21 +102,29 @@ public class BooklistActivity extends AppCompatActivity {
                     }
                 });
 
-                borrowButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                      if( counter > selectedBook.getQuantity())
-                      {
-                          Toast.makeText(BooklistActivity.this, "Not Enough Quantity Available", Toast.LENGTH_SHORT).show();
-                      }
-                        BookFunctions.borrowBook( accountInSession.getId() ,selectedBook, counter);
-                        Toast.makeText(BooklistActivity.this, "Book added to borrow list", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
 
                 builder.show();
+                borrowButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if( counter > selectedBook.getQuantity())
+                        {
+                            Toast.makeText(BooklistActivity.this, "Not Enough Quantity Available", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            BookFunctions.borrowBook( BooklistActivity.this, accountInSession.getId() ,selectedBook, counter);
+                            Toast.makeText(BooklistActivity.this, "Book added to borrow list", Toast.LENGTH_SHORT).show();
 
+                            Intent intent = new Intent(BooklistActivity.this, BorrowedListActivity.class);
+                            intent.putExtra("ACCOUNT", account);
+                            startActivity(intent);
+
+
+
+                        }
+                    }
+                });
 
 
             }

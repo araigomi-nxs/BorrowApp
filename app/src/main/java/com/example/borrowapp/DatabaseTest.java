@@ -98,7 +98,8 @@ public class DatabaseTest extends SQLiteOpenHelper {
     public void borrowBooks(Book book){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues content=new ContentValues();
-        content.put("id",book.getId());
+
+        content.put("account_id",book.getId());
         content.put("title",book.getTitle());
         content.put("description",book.getDescription());
         content.put("author",book.getAuthor());
