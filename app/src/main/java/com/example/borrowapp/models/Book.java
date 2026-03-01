@@ -12,6 +12,15 @@ public class Book {
 
     private int quantity;
     public static List<Book> bookList = new ArrayList<Book>();
+    public static void initializeBooklist()
+    {
+        Book.addBook(new Book(1,"Book1", "Description1", "Author1", 1));
+        Book.addBook(new Book(2,"Book2", "Description2", "Author2", 1));
+        Book.addBook(new Book(3,"Book3", "Description3", "Author3", 1));
+        Book.addBook(new Book(4,"Book4", "Description4", "Author4", 1));
+        Book.addBook(new Book(5,"Book5", "Description5", "Author5", 1));
+
+    }
 
     public static void addBook(Book book) {
         bookList.add(book);
