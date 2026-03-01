@@ -1,4 +1,5 @@
 package com.example.borrowapp;
+/*
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -100,3 +101,4 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 }
+*/
