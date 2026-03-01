@@ -39,15 +39,12 @@ public class BookArrayAdapter extends ArrayAdapter<Book> {
 
         TextView title = listItem.findViewById(R.id.txtTitle);
         TextView description = listItem.findViewById(R.id.txtDesc);
-        TextView date = listItem.findViewById(R.id.txtDate);
         TextView quantity = listItem.findViewById(R.id.txtQuantity);
 
 
         title.setText(currentBook.getTitle());
-        date.setText("By: " + currentBook.getAuthor());
         description.setText(currentBook.getDescription());
         quantity.setText("Available: " + currentBook.getQuantity());
-
 
         return listItem;
     }
