@@ -18,9 +18,7 @@ public class AccountOperations {
 
             return false; // exceeds char limit
         }
-        /*
 
-        */
         if(!(account.getPassword().matches("^(?=.*[A-Z])(?=.*\\\\d)[A-Za-z\\\\d]{16}$"))) {
             return false;
         }
