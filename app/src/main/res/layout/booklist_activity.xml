@@ -8,6 +8,15 @@
     android:layout_height="match_parent"
     tools:context=".activities.BooklistActivity">
 
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/backbtn"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +24,7 @@
         android:textSize="25sp"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         />
@@ -32,7 +41,7 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="15sp"
             android:layout_marginRight="25dp"
-            android:text="Borrowed Books"
+            android:text="Library Books"
             android:textColor="@color/black"
             android:textSize="17sp"
             android:textStyle="bold" />

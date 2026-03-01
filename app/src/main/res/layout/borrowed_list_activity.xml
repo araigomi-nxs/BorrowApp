@@ -8,6 +8,15 @@
     android:orientation="vertical"
     tools:context=".activities.BorrowedListActivity">
 
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/backbtn"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +25,6 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -96,21 +104,25 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/listViewBooks"
         android:layout_width="match_parent"
+        android:layout_height="355dp"
+        android:id="@+id/listViewBooks"
         android:background="@drawable/listview_bg"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"/>
+        android:layout_margin="15dp"
+        android:padding="8dp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:scrollbarStyle="outsideOverlay"/>
 
 
     <Button
         android:id="@+id/btnAddBook"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
         android:textColor="@color/white"
         android:background="@drawable/buttonlogin_bg"
         android:text="Add Book"/>
