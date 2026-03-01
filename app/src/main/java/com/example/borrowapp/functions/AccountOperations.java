@@ -12,7 +12,6 @@ public class AccountOperations {
         db=new Database(context);
     }
     public static  boolean registerAccount(Account account){
-
         if(account.getUsername().length() > 16){
 
             return false; // exceeds char limit

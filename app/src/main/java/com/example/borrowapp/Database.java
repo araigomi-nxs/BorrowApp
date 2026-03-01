@@ -111,6 +111,7 @@ public class Database extends SQLiteOpenHelper {
             content.put("quantity",book.getQuantity());
             db.insert("borrow_books",null,content);
         }
+
         public void returnBooks(int id){
             SQLiteDatabase db=this.getWritableDatabase();
             db.delete("borrow_books","id=?",new String[]{String.valueOf(id)});

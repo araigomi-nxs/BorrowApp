@@ -41,6 +41,7 @@ public class Login_activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
             inputUsername = findViewById(R.id.etUsername);
             inputPassword = findViewById(R.id.etPassword);
             login = findViewById(R.id.btnLogin);
