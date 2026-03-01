@@ -30,7 +30,7 @@ public class Database extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,"+
                 "username VARCHAR(16) UNIQUE, "+
                 "password VARCHAR(16))");
-        db.execSQL("CREATE TABLE borrow_lists("+
+        db.execSQL("CREATE TABLE borrow_books("+
                 "account_id INTEGER,"+
                 "title TEXT UNIQUE,"+
                 "description TEXT,"+
@@ -41,7 +41,7 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS accounts");
-        db.execSQL("DROP TABLE IF EXISTS borrow_lists");
+        db.execSQL("DROP TABLE IF EXISTS borrow_books");
     }
     public static boolean checkUsername(String username){
         try(Cursor cursor = db.query("accounts",new String[]{String.valueOf(username)},null,null,null,null,null)){
@@ -100,4 +100,18 @@ public class Database extends SQLiteOpenHelper {
             }
         }
     }
+    public void borrowBook(Book book) {
+        ContentValues content = new ContentValues();
+        content.put("account_id",book.getId());
+        content.put("title", book.getTitle());
+        content.put("description", book.getDescription());
+        content.put("author", book.getAuthor());
+        content.put("quantity", book.getQuantity());
+        db.insert("borrow_books",null,content);
+    }
+
+    public void returnBook(int id){
+        db.delete("borrow_books","id=?",new String[]{String.valueOf(id)});
+    }
+
 }
