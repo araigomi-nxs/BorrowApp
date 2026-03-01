@@ -90,11 +90,11 @@ public class Database extends SQLiteOpenHelper {
                 if (cursor.moveToFirst()) {
                     do {
                         Book book = new Book(
-                                cursor.getInt(1),        //id
-                                cursor.getString(2),    //title
-                                cursor.getString(3),    //description
-                                cursor.getString(4),    //author
-                                cursor.getInt(5));      //quantity
+                                cursor.getInt(0),        //id
+                                cursor.getString(1),    //title
+                                cursor.getString(2),    //description
+                                cursor.getString(3),    //author
+                                cursor.getInt(4));      //quantity
                         Book.bookList.add(book);
                     } while (cursor.moveToNext());
                 }
