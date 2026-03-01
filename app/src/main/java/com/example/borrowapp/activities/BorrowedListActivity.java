@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.borrowapp.R;
+import com.example.borrowapp.models.Account;
 
 public class BorrowedListActivity extends AppCompatActivity {
 
@@ -40,18 +41,15 @@ public class BorrowedListActivity extends AppCompatActivity {
         addBookButton = findViewById(R.id.btnAddBook);
         returnButton = findViewById(R.id.btnBack);
 
-        String username = getIntent().getStringExtra("USERNAME");
-        if (username == null || username.isEmpty()) {
-            username = "JoseRizzler";
-        }
-
-        tvUsername.setText(username);
+       Account account = (Account) getIntent().getSerializableExtra("ACCOUNT");
+        tvUsername.setText(account.getUsername());
 
 
         addBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BorrowedListActivity.this, BooklistActivity.class );
+                intent.putExtra("ACCOUNT", account);
                 startActivity( intent);
             }
         });

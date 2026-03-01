@@ -1,6 +1,8 @@
 package com.example.borrowapp.models;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
     //SIGNED IN ACCOUNT
     private static String U_username;
     public static void setU_username(String username){
