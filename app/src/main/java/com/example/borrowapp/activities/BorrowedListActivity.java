@@ -2,6 +2,7 @@ package com.example.borrowapp.activities;
 
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -67,14 +69,27 @@ public class BorrowedListActivity extends AppCompatActivity {
                 startActivity( intent);
             }
         });
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Toast.makeText(BorrowedListActivity.this, "Logout Successful, " + account.getUsername(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(BorrowedListActivity.this, Login_activity.class );
-                startActivity( intent);
-            }
+        logoutButton.setOnClickListener(view -> {
+            new AlertDialog.Builder(BorrowedListActivity.this)
+                    .setTitle("Logout")
+                    .setMessage("Are you sure you want to logout, " + account.getUsername() + "?")
+                    .setPositiveButton("YES, LOGOUT", (dialog, which) -> {
+                        Toast.makeText(BorrowedListActivity.this,
+                                "Logout Successful, " + account.getUsername(),
+                                Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(BorrowedListActivity.this, Login_activity.class);
+                        startActivity(intent);
+                        finish();
+                    })
+                    .setNegativeButton("CANCEL", (dialog, which) -> {
+                        Toast.makeText(BorrowedListActivity.this,
+                                "Logout cancelled",
+                                Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    })
+                    .show();
         });
 
 
