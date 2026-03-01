@@ -1,0 +1,72 @@
+Activities
+
+⏹1.Account- Borrowed List ( Main Activity)
+✅2 Account Register
+✅3 Account Login
+⏹4 Book Library
+⏹5 Book information
+
+
+Model
+✅1 Account 
+    - username  max16
+    - password  atleast 1 uppercase, atleast 1 number, max16
+✅2 Book    
+ hardcoded booklist
+
+Database tables
+✅1. Accounts 
+✅2. Borrow List
+
+
+Classes
+⏹ 1. Database adapter - handles accounts, borrowlist, Book Object list
+✅2. Account Functions 
+    ✅-register account
+        - check cases
+        to DB
+        - add entry
+   ✅ -verify account
+        from DB
+        - functions
+        - confirmation if user exist Account ( input username & input pass) -> function( String username, String password match)  found?  1:0
+⏹3. Display Class for Book information activity
+⏹4. Listview adapter - fetch from Book Object List
+⏹5. Borrow Class - handles operation for borrowing, updating quantity and updating borrow list table
+⏹6. Booklist initializer - intialize hardcoded book list
+✅7. Hardcoded booklist - 
+------------------------------------------------------------
+
+Login Activity id
+
+Edit Text
+1. etUsername
+2. etPassword
+
+Button
+1. btnLogin  (Login Button)
+2. btnCreate (create new account button)
+
+Text View
+1. tvForgotPassword
+
+Register Activity
+
+Edit Text
+1. etUsername
+2. etPassword
+
+Button
+1. btnRegister
+
+Text View
+1. tvAlready (Already have an account)
+
+Drawable
+1.buttoncreateacc_bg
+2.buttonlogin_bg
+3.edittext_bg
+
+layout
+1.
+
