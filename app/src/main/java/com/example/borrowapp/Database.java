@@ -18,6 +18,7 @@ public class Database extends SQLiteOpenHelper {
     //IMPORTANT: call itong constructor sa MainActivity.java:
     //Example:
     //Database db = new Database(this);
+
     public Database(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }

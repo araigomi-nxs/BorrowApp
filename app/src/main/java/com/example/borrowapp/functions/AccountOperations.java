@@ -25,7 +25,5 @@ public class AccountOperations {
         return true;
 
     }
-    public boolean verifyAccount(Account account){
-        return Database.log_in(account);
-    }
+
 }

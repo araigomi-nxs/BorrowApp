@@ -13,7 +13,8 @@ public class BookFunctions {
     public static void borrowBook ( int userId ,Book book , int orderQuantity)
     {
        book.setId(userId);
-       Database.borrowBooks(book);
+       //Database db = new Database(null);
+       // db.borrowBooks(book);
     }
 
     public void displayBookList(){
