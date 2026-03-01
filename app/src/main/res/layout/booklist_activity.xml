@@ -55,7 +55,10 @@
         android:layout_height="match_parent"
         android:id="@+id/listViewBooks"
         android:background="@drawable/listview_bg"
-        android:layout_margin="15dp"/>
-
+        android:layout_margin="15dp"
+        android:padding="8dp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:scrollbarStyle="outsideOverlay"/>
 
 </LinearLayout>
