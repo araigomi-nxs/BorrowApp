@@ -1,10 +1,14 @@
 package com.example.borrowapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -42,6 +46,19 @@ public class BooklistActivity extends AppCompatActivity {
           BookArrayAdapter bookArrayAdapter =new BookArrayAdapter(this, bookList);
         listView.setAdapter(bookArrayAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Book selectedBook = bookList.get(position);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(BooklistActivity.this);
+                view = getLayoutInflater().inflate(R.layout.bookinformation_activity,null);
+                builder.setView(view);
+                builder.show();
+
+
+            }
+        });
 
 
     }

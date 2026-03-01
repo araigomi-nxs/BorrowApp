@@ -23,4 +23,6 @@ public class Register_activity extends AppCompatActivity {
             return insets;
         });
     }
+
 }
+
