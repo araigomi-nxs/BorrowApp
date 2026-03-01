@@ -42,31 +42,30 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS borrow_books");
     }
 
-        public boolean checkUsername(String username){
-            SQLiteDatabase db=this.getWritableDatabase();
-            try(Cursor cursor = db.query("accounts",new String[]{String.valueOf(username)},null,null,null,null,null)){
-                if(cursor.moveToFirst()){
-                    do{
-                        if (username.equals(cursor.getString(1)))return true;
-                    }while(cursor.moveToNext());
-                }
-            }
-            return false;
+    public boolean checkUsername(String username){
+        SQLiteDatabase db = this.getReadableDatabase();
+        try (Cursor cursor = db.query(
+                "accounts",                     // table
+                new String[]{"username"},       // columns to return
+                "username=?",                   // selection
+                new String[]{username},         // selection args
+                null, null, null
+        )) {
+            return cursor.moveToFirst();       // true if exists
         }
-        public boolean log_in(String inputUsername,String inputPassword){
-            SQLiteDatabase db=this.getWritableDatabase();
-            try(Cursor cursor = db.query("accounts",null,null,null,null,null,null)){
-                if(cursor.moveToFirst()){
-                    do{
-                        String username = cursor.getString(2);
-                        String password = cursor.getString(3);
-                        if (inputUsername.equals(username) && inputPassword.equals(password))
-                        { return true; }
-                    }while(cursor.moveToNext());
-                }
-            }
-            return false;
+    }
+    public boolean log_in(String username, String password){
+        SQLiteDatabase db = this.getReadableDatabase();
+        try (Cursor cursor = db.query(
+                "accounts",
+                new String[]{"username"},
+                "username=? AND password=?",
+                new String[]{username, password},
+                null, null, null
+        )) {
+            return cursor.moveToFirst();  // true if match found
         }
+    }
         public void registerAccount(Account account){
             SQLiteDatabase db=this.getWritableDatabase();
             ContentValues content = new ContentValues();
@@ -80,9 +79,9 @@ public class Database extends SQLiteOpenHelper {
                 if (cursor.moveToFirst()) {
                     do {
                         Account account = new Account(
-                                cursor.getInt(1),    //id
-                                cursor.getString(2),//username
-                                cursor.getString(3)//password
+                                cursor.getInt(0),    //id
+                                cursor.getString(1),//username
+                                cursor.getString(2)//password
                         );
                     } while (cursor.moveToNext());
                 }
@@ -104,7 +103,7 @@ public class Database extends SQLiteOpenHelper {
         public void borrowBooks(Book book){
             SQLiteDatabase db=this.getWritableDatabase();
             ContentValues content=new ContentValues();
-            content.put("id",book.getId());
+            content.put("account_id",book.getId());
             content.put("title",book.getTitle());
             content.put("description",book.getDescription());
             content.put("author",book.getAuthor());
