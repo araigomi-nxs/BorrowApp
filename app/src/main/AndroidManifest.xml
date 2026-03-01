@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BorrowApp">
         <activity
+            android:name=".BooklistActivity"
+            android:exported="false" />
+        <activity
             android:name=".BorrowedBooksActivity"
             android:exported="false" />
         <activity
