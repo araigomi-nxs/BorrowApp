@@ -22,7 +22,6 @@ public class AccountOperations {
 
         */
         if(!(account.getPassword().matches("^(?=.*[A-Z])(?=.*\\\\d)[A-Za-z\\\\d]{16}$"))) {
-
             return false;
         }
        // Database.registerAccount(account);

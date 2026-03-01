@@ -43,7 +43,6 @@ public class Login_activity extends AppCompatActivity {
         });
             inputUsername = findViewById(R.id.etUsername);
             inputPassword = findViewById(R.id.etPassword);
-
             login = findViewById(R.id.btnLogin);
         login.setOnClickListener(v -> {
             String username = inputUsername.getText().toString().trim();
