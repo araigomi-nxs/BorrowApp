@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="70dp"
 
-            android:fontFamily="@font/archivo_black"
+            android:fontFamily="sans-serif"
             android:text="BbOOKINGS"
             android:textColor="@color/black"
             android:textSize="30dp"
@@ -58,7 +58,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/buttonlogin_bg"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="sans-serif"
             android:text="Login"
             android:textColor="@color/white" />
 
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="150dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="sans-serif"
             android:text="Forgot password?"
             android:textColor="@color/black" />
 
@@ -79,7 +79,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/buttoncreateacc_bg"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="sans-serif"
             android:text="Create new account" />
 
 
