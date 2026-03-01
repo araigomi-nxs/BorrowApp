@@ -10,16 +10,10 @@ public class BookFunctions {
 
     //retrieve book -
 
-    public boolean borrowBook (Book book , int orderQuantity)
+    public static void borrowBook ( int userId ,Book book , int orderQuantity)
     {
-        if ( orderQuantity > book.getQuantity())
-        {
-            return false; // not enough quantity
-        }
-        Database.borrowBooks(book);
-
-        return  true;
-
+       book.setId(userId);
+       Database.borrowBooks(book);
     }
 
     public void displayBookList(){

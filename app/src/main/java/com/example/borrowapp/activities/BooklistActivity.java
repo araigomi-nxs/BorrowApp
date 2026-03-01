@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -18,6 +19,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.borrowapp.R;
 import com.example.borrowapp.functions.BookArrayAdapter;
+import com.example.borrowapp.functions.BookFunctions;
+import com.example.borrowapp.models.Account;
 import com.example.borrowapp.models.Book;
 
 import java.util.List;
@@ -27,6 +30,8 @@ public class BooklistActivity extends AppCompatActivity {
     private static List<Book> bookList ;
     private ListView listView;
     private int counter = 1;
+
+    private Account accountInSession = new Account(1,"Juan Carlo","1234");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -74,7 +79,6 @@ public class BooklistActivity extends AppCompatActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(BooklistActivity.this);
                 builder.setView(view);
-
                 addquantityButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -94,7 +98,17 @@ public class BooklistActivity extends AppCompatActivity {
                     }
                 });
 
-
+                borrowButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                      if( counter > selectedBook.getQuantity())
+                      {
+                          Toast.makeText(BooklistActivity.this, "Not Enough Quantity Available", Toast.LENGTH_SHORT).show();
+                      }
+                        BookFunctions.borrowBook( accountInSession.getId() ,selectedBook, counter);
+                        Toast.makeText(BooklistActivity.this, "Book added to borrow list", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 
                 builder.show();
