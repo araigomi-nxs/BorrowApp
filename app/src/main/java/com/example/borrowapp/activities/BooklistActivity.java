@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -50,11 +52,27 @@ public class BooklistActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Book selectedBook = bookList.get(position);
+                view = getLayoutInflater().inflate(R.layout.bookinformation_activity,null);
+                TextView titletv, desctv, authortv, quantitytv;
+                Button borrowButton , addquantityButton, reduceQuantityButton;
+
+                titletv = view.findViewById(R.id.tvTitle);
+                desctv = view.findViewById(R.id.tvDesc);
+                authortv= view.findViewById(R.id.tvAuthor);
+                quantitytv= view.findViewById(R.id.tvQuantity);
+                borrowButton = view.findViewById(R.id.btnAdditon);
+
+                titletv.setText(selectedBook.getTitle());
+                desctv.setText(selectedBook.getDescription());
+                authortv.setText(selectedBook.getAuthor());
+                quantitytv.setText(String.valueOf(selectedBook.getQuantity()));
+
+
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(BooklistActivity.this);
-                view = getLayoutInflater().inflate(R.layout.bookinformation_activity,null);
                 builder.setView(view);
                 builder.show();
+
 
 
             }
