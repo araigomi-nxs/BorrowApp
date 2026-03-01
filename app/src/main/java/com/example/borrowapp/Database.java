@@ -15,13 +15,12 @@ import com.example.borrowapp.models.Book;
 public class Database extends SQLiteOpenHelper {
     private static final String DB_NAME = "borrowapp.db";
     private static final int DB_VERSION = 1;
-    private static SQLiteDatabase db;
     //IMPORTANT: call itong constructor sa MainActivity.java:
     //Example:
     //Database db = new Database(this);
+
     public Database(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        db = this.getWritableDatabase();
     }
     //ma create na table after creation ng app
     @Override
@@ -43,73 +42,79 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS accounts");
         db.execSQL("DROP TABLE IF EXISTS borrow_books");
     }
-    public static boolean checkUsername(String username){
-        try(Cursor cursor = db.query("accounts",new String[]{String.valueOf(username)},null,null,null,null,null)){
-            if(cursor.moveToFirst()){
-                do{
-                    if (username.equals(cursor.getString(1)))return false;
-                }while(cursor.moveToNext());
-            }
-        }
-        return true;
-    }
-    public static boolean log_in(Account account){
 
-        try(Cursor cursor = db.query("accounts",null,null,null,null,null,null)){
-            if(cursor.moveToFirst()){
-                do{
-                    String username = cursor.getString(1);
-                    String password = cursor.getString(2);
-                    if (account.getUsername().equals(username) && account.getPassword().equals(password))
-                    { return true; }
-                }while(cursor.moveToNext());
+        public boolean checkUsername(String username){
+            SQLiteDatabase db=this.getWritableDatabase();
+            try(Cursor cursor = db.query("accounts",new String[]{String.valueOf(username)},null,null,null,null,null)){
+                if(cursor.moveToFirst()){
+                    do{
+                        if (username.equals(cursor.getString(1)))return true;
+                    }while(cursor.moveToNext());
+                }
+            }
+            return false;
+        }
+        public boolean log_in(String inputUsername,String inputPassword){
+            SQLiteDatabase db=this.getWritableDatabase();
+            try(Cursor cursor = db.query("accounts",null,null,null,null,null,null)){
+                if(cursor.moveToFirst()){
+                    do{
+                        String username = cursor.getString(2);
+                        String password = cursor.getString(3);
+                        if (inputUsername.equals(username) && inputPassword.equals(password))
+                        { return true; }
+                    }while(cursor.moveToNext());
+                }
+            }
+            return false;
+        }
+        public void registerAccount(Account account){
+            SQLiteDatabase db=this.getWritableDatabase();
+            ContentValues content = new ContentValues();
+            content.put("username", account.getUsername());
+            content.put("password",account.getPassword());
+            db.insert("accounts",null,content);
+        }
+        public void initializeUser() {
+            SQLiteDatabase db=this.getWritableDatabase();
+            try (Cursor cursor = db.query("accounts", null, null, null, null, null, null)) {
+                if (cursor.moveToFirst()) {
+                    do {
+                        Account account = new Account(
+                                cursor.getInt(1),    //id
+                                cursor.getString(2),//username
+                                cursor.getString(3)//password
+                        );
+                    } while (cursor.moveToNext());
+                }
+            }
+            try (Cursor cursor = db.query("borrow_books", null, null, null, null, null, null)) {
+                if (cursor.moveToFirst()) {
+                    do {
+                        Book book = new Book(
+                                cursor.getInt(1),        //id
+                                cursor.getString(2),    //title
+                                cursor.getString(3),    //description
+                                cursor.getString(4),    //author
+                                cursor.getInt(5));      //quantity
+                        Book.bookList.add(book);
+                    } while (cursor.moveToNext());
+                }
             }
         }
-        return false;
-    }
-    public static void registerAccount(Account account){
-        ContentValues content = new ContentValues();
-        content.put("username", account.getUsername());
-        content.put("password",account.getPassword());
-        db.insert("accounts",null,content);
-    }
-    public static void initializeUser(){
-        try(Cursor cursor = db.query("accounts",null,null,null,null,null,null)){
-            if(cursor.moveToFirst()){
-                do{
-                    Account account = new Account(
-                            cursor.getInt(0),    //id
-                            cursor.getString(1),//username
-                            cursor.getString(2)//password
-                    );
-                }while(cursor.moveToNext());
-            }
+        public void borrowBooks(Book book){
+            SQLiteDatabase db=this.getWritableDatabase();
+            ContentValues content=new ContentValues();
+            content.put("id",book.getId());
+            content.put("title",book.getTitle());
+            content.put("description",book.getDescription());
+            content.put("author",book.getAuthor());
+            content.put("quantity",book.getQuantity());
+            db.insert("borrow_books",null,content);
         }
-        try(Cursor cursor = db.query("borrow_books",null,null,null,null,null,null)){
-            if(cursor.moveToFirst()){
-                do{
-                    Book book = new Book(
-                            cursor.getInt(0),        //id
-                            cursor.getString(1),    //title
-                            cursor.getString(2),    //description
-                            cursor.getString(3),    //author
-                            cursor.getInt(4));      //quantity
-                    Book.bookList.add(book);
+        public void returnBooks(int id){
+            SQLiteDatabase db=this.getWritableDatabase();
+            db.delete("borrow_books","id=?",new String[]{String.valueOf(id)});
+        }
 
-                }while(cursor.moveToNext());
-            }
-        }
-    }
-    public static void borrowBooks(Book book){
-        ContentValues content=new ContentValues();
-        content.put("id",book.getId());
-        content.put("title",book.getTitle());
-        content.put("description",book.getDescription());
-        content.put("author",book.getAuthor());
-        content.put("quantity",book.getQuantity());
-        db.insert("borrow_books",null,content);
-    }
-    public void returnBooks(int id){
-        db.delete("borrow_books","id=?",new String[]{String.valueOf(id)});
-    }
 }
