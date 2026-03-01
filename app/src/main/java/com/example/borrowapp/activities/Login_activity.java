@@ -33,7 +33,6 @@ public class Login_activity extends AppCompatActivity {
         db=new Database(this);
         ao = new AccountOperations(this);
         start();
-
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);

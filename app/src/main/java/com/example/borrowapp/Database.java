@@ -100,6 +100,7 @@ public class Database extends SQLiteOpenHelper {
                 }
             }
         }
+
         public void borrowBooks(Book book){
             SQLiteDatabase db=this.getWritableDatabase();
             ContentValues content=new ContentValues();

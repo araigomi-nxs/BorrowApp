@@ -10,7 +10,6 @@ public class AccountOperations {
     private Database db;
     public AccountOperations(Context context) {
         db=new Database(context);
-
     }
     public static  boolean registerAccount(Account account){
 
