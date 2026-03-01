@@ -25,8 +25,8 @@ import java.util.List;
 public class BooklistActivity extends AppCompatActivity {
 
     private static List<Book> bookList ;
-    ListView listView;
-
+    private ListView listView;
+    private int counter = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -53,14 +53,18 @@ public class BooklistActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Book selectedBook = bookList.get(position);
                 view = getLayoutInflater().inflate(R.layout.bookinformation_activity,null);
-                TextView titletv, desctv, authortv, quantitytv;
+                TextView titletv, desctv, authortv, quantitytv, orderquantitytv;
                 Button borrowButton , addquantityButton, reduceQuantityButton;
 
                 titletv = view.findViewById(R.id.tvTitle);
                 desctv = view.findViewById(R.id.tvDesc);
                 authortv= view.findViewById(R.id.tvAuthor);
                 quantitytv= view.findViewById(R.id.tvQuantity);
-                borrowButton = view.findViewById(R.id.btnAdditon);
+                orderquantitytv= view.findViewById(R.id.tvOrderQuantity);
+                borrowButton = view.findViewById(R.id.btnBorrowedplus);
+                addquantityButton = view.findViewById(R.id.btnAdditon);
+                reduceQuantityButton = view.findViewById(R.id.btnMinus);
+
 
                 titletv.setText(selectedBook.getTitle());
                 desctv.setText(selectedBook.getDescription());
@@ -68,9 +72,31 @@ public class BooklistActivity extends AppCompatActivity {
                 quantitytv.setText(String.valueOf(selectedBook.getQuantity()));
 
 
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(BooklistActivity.this);
                 builder.setView(view);
+
+                addquantityButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        counter++;
+                        orderquantitytv.setText(String.valueOf( counter));
+                    }
+                });
+
+                reduceQuantityButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(counter !=1)
+                        {
+                            counter--;
+                        }
+                        orderquantitytv.setText(String.valueOf(counter) );
+                    }
+                });
+
+
+
+
                 builder.show();
 
 
