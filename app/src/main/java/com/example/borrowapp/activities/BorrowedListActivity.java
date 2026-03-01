@@ -20,7 +20,7 @@ import com.example.borrowapp.R;
 public class BorrowedListActivity extends AppCompatActivity {
 
     ListView borrowedBookList;
-    Button addBookButton;
+    Button addBookButton, returnButton;
 
     TextView tvUsername;
 
@@ -38,6 +38,7 @@ public class BorrowedListActivity extends AppCompatActivity {
 
         tvUsername = findViewById(R.id.tvUsername);
         addBookButton = findViewById(R.id.btnAddBook);
+        returnButton = findViewById(R.id.btnBack);
 
         String username = getIntent().getStringExtra("USERNAME");
         if (username == null || username.isEmpty()) {
@@ -54,6 +55,14 @@ public class BorrowedListActivity extends AppCompatActivity {
                 startActivity( intent);
             }
         });
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BorrowedListActivity.this, Login_activity.class );
+                startActivity( intent);
+            }
+        });
+
 
 
     }

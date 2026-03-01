@@ -47,6 +47,9 @@ public class BooklistActivity extends AppCompatActivity {
         Book.initializeBooklist();
         bookList = Book.bookList;
 
+        Button returnButton = findViewById(R.id.btnBack);
+
+
         Log.d("BooklistActivity", "bookList size: " + bookList.size());
 
         listView = findViewById(R.id.listViewBooks);
@@ -117,6 +120,15 @@ public class BooklistActivity extends AppCompatActivity {
 
             }
         });
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BooklistActivity.this, BorrowedListActivity.class );
+                startActivity( intent);
+            }
+        });
+
 
 
     }
