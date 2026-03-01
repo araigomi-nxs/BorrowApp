@@ -1,6 +1,7 @@
 package com.example.borrowapp.functions;
 
 //import com.example.borrowapp.Database;
+import com.example.borrowapp.Database;
 import com.example.borrowapp.models.Account;
 
 public class AccountOperations {
@@ -24,16 +25,7 @@ public class AccountOperations {
         return true;
 
     }
-    //0 if not found // 1 if found
-     /*
     public boolean verifyAccount(Account account){
-
-
-          if( !(Database.checkUsername(account.getUsername()) && account.getPassword().matches(Database.checkPassword(account.getUsername()))))
-        {
-            return false;
-        }
-        return true;
+        return Database.log_in(account);
     }
- */
 }
