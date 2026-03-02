@@ -1,7 +1,5 @@
 package com.example.borrowapp.activities;
 
-
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,8 +54,6 @@ public class BorrowedListActivity extends AppCompatActivity {
 
         BorrowedBookAdapter borrowedBookAdapter = new BorrowedBookAdapter(this, databasetest.getBorrowedBooklist() );
         borrowedBookList.setAdapter(borrowedBookAdapter);
-
-
 
 
 
