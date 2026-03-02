@@ -2,9 +2,9 @@ package com.example.borrowapp.activities;
 
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,12 +18,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.borrowapp.Database;
 import com.example.borrowapp.DatabaseTest;
 import com.example.borrowapp.R;
-import com.example.borrowapp.functions.BookArrayAdapter;
 import com.example.borrowapp.functions.BorrowedBookAdapter;
 import com.example.borrowapp.models.Account;
+import com.example.borrowapp.models.Book;
+
+import java.util.List;
 
 public class BorrowedListActivity extends AppCompatActivity {
 
@@ -48,13 +49,22 @@ public class BorrowedListActivity extends AppCompatActivity {
         addBookButton = findViewById(R.id.btnAddBook);
         logoutButton = findViewById(R.id.btnLogout);
 
-       Account account = (Account) getIntent().getSerializableExtra("ACCOUNT");
+        Account account = (Account) getIntent().getSerializableExtra("ACCOUNT");
         tvUsername.setText(account.getUsername());
 
         borrowedBookList = findViewById(R.id.listViewBooks);
-        DatabaseTest databasetest = new DatabaseTest(BorrowedListActivity.this);
 
-        BorrowedBookAdapter borrowedBookAdapter = new BorrowedBookAdapter(this, databasetest.getBorrowedBooklist() );
+        DatabaseTest databasetest = new DatabaseTest(BorrowedListActivity.this);
+        Book.initializeBooklist();
+        List<Book> bookList = Book.getBooklist();
+        Log.d("BorrowedListActivity", "bookList: " + bookList);
+        databasetest.createBookLibrary(bookList);
+
+
+
+
+
+        BorrowedBookAdapter borrowedBookAdapter = new BorrowedBookAdapter(this, databasetest.getBorrowedBooklist());
         borrowedBookList.setAdapter(borrowedBookAdapter);
 
 

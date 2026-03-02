@@ -47,17 +47,14 @@ public class BorrowedBookAdapter extends ArrayAdapter<Book> {
         TextView date = listItem.findViewById(R.id.txtDate);
         TextView quantity = listItem.findViewById(R.id.txtQuantity);
 
-
         title.setText(currentBook.getTitle());
         description.setText(currentBook.getDescription());
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         String currentDateTime = dateFormat.format(calendar.getTime());
-
-
         date.setText(currentDateTime);
-        quantity.setText("Available: " + currentBook.getQuantity());
+        quantity.setText(String.valueOf( currentBook.getQuantity()));
 
         return listItem;
     }

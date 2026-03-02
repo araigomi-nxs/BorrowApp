@@ -11,7 +11,7 @@ public class Book {
     private String author;
 
     private int quantity;
-    public static List<Book> bookList = new ArrayList<Book>();
+    public static List<Book> bookList = new ArrayList<>();
     public static void initializeBooklist()
     {
         Book.addBook(new Book(1, "The Great Gatsby", "A classic novel set in the Jazz Age, exploring themes of wealth, love, and the American Dream. The story follows the mysterious millionaire Jay Gatsby and his obsession with Daisy Buchanan.", "F. Scott Fitzgerald", 5));
@@ -51,6 +51,10 @@ public class Book {
         this.id = id;
     }
 
+    public static List<Book> getBooklist()
+    {
+        return bookList;
+    }
 
     public String getTitle() {
         return title;
@@ -80,19 +84,20 @@ public class Book {
         return quantity;
     }
 
-    public void setQuantity(int quantity, int operation) {
+    public void setQuantity(int orderquantity, int operation) {
        if(operation == 1)
        {
-           this.quantity += quantity;
+           this.quantity = this.quantity+ orderquantity;
+       }
+       else if(operation == 2)
+       {
+           this.quantity = this.quantity- orderquantity;
        }
        else if(operation == 0)
        {
-           this.quantity -= quantity;
+           this.quantity = orderquantity;
        }
-       else
-       {
-           this.quantity = quantity;
-       }
+
     }
 
 

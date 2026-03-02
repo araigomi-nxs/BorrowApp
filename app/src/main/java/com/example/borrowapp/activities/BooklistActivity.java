@@ -17,6 +17,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.borrowapp.Database;
+import com.example.borrowapp.DatabaseTest;
 import com.example.borrowapp.R;
 import com.example.borrowapp.functions.BookArrayAdapter;
 import com.example.borrowapp.functions.BookFunctions;
@@ -44,7 +46,6 @@ public class BooklistActivity extends AppCompatActivity {
             return insets;
         });
         Account account = (Account) getIntent().getSerializableExtra("ACCOUNT");
-        Book.initializeBooklist();
         bookList = Book.bookList;
 
         Button returnButton = findViewById(R.id.btnBack);
@@ -77,7 +78,9 @@ public class BooklistActivity extends AppCompatActivity {
                 titletv.setText(selectedBook.getTitle());
                 desctv.setText(selectedBook.getDescription());
                 authortv.setText(selectedBook.getAuthor());
-                quantitytv.setText(String.valueOf(selectedBook.getQuantity()));
+
+                DatabaseTest db = new DatabaseTest(BooklistActivity.this);
+                quantitytv.setText(String.valueOf(db.getQuantity(selectedBook.getId())));
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(BooklistActivity.this);
@@ -102,13 +105,12 @@ public class BooklistActivity extends AppCompatActivity {
                     }
                 });
 
-
-
                 builder.show();
                 borrowButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if( counter > selectedBook.getQuantity())
+                        DatabaseTest databaseTest = new DatabaseTest(BooklistActivity.this);
+                        if( counter > databaseTest.getQuantity(selectedBook.getId()))
                         {
                             Toast.makeText(BooklistActivity.this, "Not Enough Quantity Available", Toast.LENGTH_SHORT).show();
                         }
@@ -118,6 +120,7 @@ public class BooklistActivity extends AppCompatActivity {
 
                             Intent intent = new Intent(BooklistActivity.this, BorrowedListActivity.class);
                             intent.putExtra("ACCOUNT", account);
+
                             startActivity(intent);
 
 

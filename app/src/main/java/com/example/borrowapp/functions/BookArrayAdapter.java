@@ -10,16 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.borrowapp.Database;
+import com.example.borrowapp.DatabaseTest;
 import com.example.borrowapp.R;
 import com.example.borrowapp.models.Book;
 
 import java.util.List;
 
 public class BookArrayAdapter extends ArrayAdapter<Book> {
-
     private Context context;
     private List<Book> bookList;
 
+    //constructor
     public BookArrayAdapter(@NonNull Context context, List<Book> bookList) {
         super(context, 0, bookList);
         this.context = context;
@@ -27,16 +29,19 @@ public class BookArrayAdapter extends ArrayAdapter<Book> {
     }
 
 
+    //
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View listItem = convertView;
 
+        View listItem = convertView;
+        // inflate
         if (listItem == null) {
             listItem = LayoutInflater.from(context).inflate(R.layout.inventory_books_card, parent, false);
         }
-
         Book currentBook = bookList.get(position);
+
+
 
         TextView title = listItem.findViewById(R.id.txtTitle);
         TextView description = listItem.findViewById(R.id.txtDesc);
@@ -45,7 +50,9 @@ public class BookArrayAdapter extends ArrayAdapter<Book> {
 
         title.setText(currentBook.getTitle());
         description.setText(currentBook.getDescription());
-        quantity.setText("Available: " + currentBook.getQuantity());
+        DatabaseTest db = new DatabaseTest(context);
+        quantity.setText("Available: " +  String.valueOf(db.getQuantity(currentBook.getId())));
+
 
         return listItem;
     }

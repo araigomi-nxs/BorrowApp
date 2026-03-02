@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.borrowapp.models.Account;
 import com.example.borrowapp.models.Book;
@@ -16,30 +17,33 @@ import java.util.List;
 public class DatabaseTest extends SQLiteOpenHelper {
     private static final String DB_NAME = "borrowapp2.db";
     private static final int DB_VERSION = 1;
-
     public DatabaseTest( Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         db.execSQL("CREATE TABLE accounts("+
                 "id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,"+
                 "username TEXT UNIQUE, "+
                 "password TEXT)");
-        db.execSQL("CREATE TABLE borrow_books("+
-                "account_id INTEGER,"+
-                "title TEXT UNIQUE,"+
+        db.execSQL("CREATE TABLE borrow_books ("+
+                "account_id INTEGER ,"+
+                "title TEXT,"+
                 "description TEXT,"+
                 "author TEXT,"+
                 "quantity INTEGER)");
+
+        db.execSQL("CREATE TABLE books_inventory("+
+                "book_id INTEGER UNIQUE,"+
+                "stock INTEGER)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS accounts");
         db.execSQL("DROP TABLE IF EXISTS borrow_books");
+        db.execSQL("DROP TABLE IF EXISTS books_inventory");
     }
 
     public boolean checkUsername(String username){
@@ -63,6 +67,8 @@ public class DatabaseTest extends SQLiteOpenHelper {
         cursor.close();
         return isValid;
     }
+
+
     public void registerAccount(Account account){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues content = new ContentValues();
@@ -112,6 +118,7 @@ public class DatabaseTest extends SQLiteOpenHelper {
     public List<Book> getBorrowedBooklist(){
         List<Book> borrowedBookList = new ArrayList<>();
         SQLiteDatabase db=this.getReadableDatabase();
+
         Cursor cursor=db.rawQuery("SELECT * FROM borrow_books",null);
 
         while (cursor.moveToNext()) {
@@ -129,6 +136,47 @@ public class DatabaseTest extends SQLiteOpenHelper {
         db.close();
         return borrowedBookList;
     }
+
+    public void createBookLibrary(List<Book> booklist)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        System.out.println("test");
+        for(Book book : booklist) {
+            insertBook(book);
+        }
+        db.close();
+    }
+
+    public void insertBook(Book book) //insert by row
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues content=new ContentValues();
+        content.put("book_id",book.getId());
+        content.put("stock",book.getQuantity());
+        db.insert("books_inventory",null,content);
+
+    }
+
+    public void updateBookStock(int bookId, int newStock) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE books_inventory SET stock = " + newStock +
+                " WHERE book_id = " + bookId);
+        db.close();
+    }
+
+    public int getQuantity(int bookId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query("books_inventory", new String[]{"stock"},"book_id LIKE ? ", new String[] {String.valueOf(bookId)},null, null, null );
+
+        if (!cursor.moveToFirst())
+        {
+            db.close();
+            return 0;
+        }
+        db.close();
+        return cursor.getInt(0);
+    }
+
 
 
     public void returnBooks(int id){

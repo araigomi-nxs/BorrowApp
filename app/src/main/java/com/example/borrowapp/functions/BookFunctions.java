@@ -10,18 +10,18 @@ import com.example.borrowapp.models.Book;
 import java.util.List;
 
 public class BookFunctions {
-   private static List<Book> booklist = Book.bookList;
+
 
     //retrieve book -
 
     public static void borrowBook (Context context, int userId , Book book , int orderQuantity)
     {
-       booklist.get(book.getId()).setQuantity(orderQuantity,0);
-       book.setId(userId);
-       book.setQuantity(orderQuantity,2);
-       DatabaseTest db = new DatabaseTest(context);
+        DatabaseTest db = new DatabaseTest(context);
+       db.updateBookStock(book.getId(), book.getQuantity()-orderQuantity);
+       book.setQuantity(orderQuantity,0);
        db.borrowBooks(book);
-       Log.d("BookFunctions", "borrowBook: " + book.getId());
+
+        Log.d( "BookFunctions", "bookquant: " + book.getQuantity());
     }
 
     public static void returnBook(Context context,int userId ,Book book, int orderQuantity)
