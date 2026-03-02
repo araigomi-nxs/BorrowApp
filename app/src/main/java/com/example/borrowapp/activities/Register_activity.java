@@ -85,8 +85,7 @@ public class Register_activity extends AppCompatActivity {
 
         return validatePassword(password);
     }
-
-
+    
     private boolean validatePassword(String password) {
 
         if (password.length() < 8) {
