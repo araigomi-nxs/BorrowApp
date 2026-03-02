@@ -60,7 +60,7 @@ public class Login_activity extends AppCompatActivity {
                         Intent intent = new Intent(Login_activity.this, BorrowedListActivity.class);
                         intent.putExtra("ACCOUNT", account);
                         startActivity(intent);
-                        Toast.makeText(Login_activity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login_activity.this, "Welcome, " + account.getUsername(), Toast.LENGTH_SHORT).show();
                     }
                     else
                     {

@@ -72,7 +72,7 @@ public class BorrowedListActivity extends AppCompatActivity {
                     .setMessage("Are you sure you want to logout, " + account.getUsername() + "?")
                     .setPositiveButton("YES, LOGOUT", (dialog, which) -> {
                         Toast.makeText(BorrowedListActivity.this,
-                                "Logout Successful, " + account.getUsername(),
+                                "okie.",
                                 Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(BorrowedListActivity.this, Login_activity.class);
